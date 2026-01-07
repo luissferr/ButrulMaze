@@ -29,7 +29,7 @@ public class MovGiroscopio : MonoBehaviour
             // Rotación basada en la velocidad angular del giroscopio
             Vector3 rotGiro = giro.rotationRateUnbiased;
             float tX = rotGiro.x * sensibilidad;
-            float tZ = -rotGiro.y * sensibilidad;
+            float tZ = rotGiro.y * sensibilidad;
 
             Quaternion targetRot = Quaternion.Euler(
                 Mathf.Clamp(NormalizeAngle(transform.localEulerAngles.x + tX), -maxAngulo, maxAngulo),
@@ -53,4 +53,6 @@ public class MovGiroscopio : MonoBehaviour
         if (angle > 180) angle -= 360;
         return angle;
     }
+
+
 }
