@@ -1,58 +1,47 @@
 using UnityEngine;
 
-
 public class MovGiroscopio : MonoBehaviour
 {
-    private Gyroscope giro;
-    private bool giroSoportado;
-
-    [Header("Configuración")]
-    public float sensibilidad = 2.5f;
-    public float suavizado = 6.0f;
-    public float maxAngulo = 22f; // Limita la inclinación para que sea jugable
+    [Header("Configuración de Control")]
+    public float sensibilidad = 1.5f;
+    public float suavizado = 10.0f;
+    public float maxAngulo = 18f; 
 
     void Start()
     {
-        giroSoportado = SystemInfo.supportsGyroscope;
-        if (giroSoportado)
+        
+        if (SystemInfo.supportsGyroscope)
         {
-            giro = Input.gyro;
-            giro.enabled = true;
+            Input.gyro.enabled = true;
         }
+
+       
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+       
+        transform.localRotation = Quaternion.identity;
     }
 
     void Update()
     {
-        if (giroSoportado)
-        {
-            // Rotación basada en la velocidad angular del giroscopio
-            Vector3 rotGiro = giro.rotationRateUnbiased;
-            float tX = rotGiro.x * sensibilidad;
-            float tZ = rotGiro.y * sensibilidad;
+       
+        Vector3 inclinacion = Input.acceleration;
 
-            Quaternion targetRot = Quaternion.Euler(
-                Mathf.Clamp(NormalizeAngle(transform.localEulerAngles.x + tX), -maxAngulo, maxAngulo),
-                0,
-                Mathf.Clamp(NormalizeAngle(transform.localEulerAngles.z + tZ), -maxAngulo, maxAngulo)
-            );
+        
+        float targetX = -inclinacion.y * maxAngulo * sensibilidad;
+        float targetZ = inclinacion.x * maxAngulo * sensibilidad;
 
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRot, Time.deltaTime * suavizado);
-        }
-        else
-        {
-            // Acelerómetro como respaldo (Fallback)
-            Vector3 acc = Input.acceleration;
-            Quaternion targetAcc = Quaternion.Euler(acc.y * maxAngulo, 0, -acc.x * maxAngulo);
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, targetAcc, Time.deltaTime * suavizado);
-        }
+        
+        targetX = Mathf.Clamp(targetX, -maxAngulo, maxAngulo);
+        targetZ = Mathf.Clamp(targetZ, -maxAngulo, maxAngulo);
+
+        
+        Quaternion targetRotation = Quaternion.Euler(targetX, 0, targetZ);
+
+ 
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.deltaTime * suavizado);
+
+       
+        transform.localPosition = Vector3.zero;
     }
-
-    float NormalizeAngle(float angle)
-    {
-        if (angle > 180) angle -= 360;
-        return angle;
-    }
-
-
 }
