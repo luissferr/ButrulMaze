@@ -1081,6 +1081,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9618ebc2188198d47a7e1a483f203958, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 668731d3ef5d2a646a35db8088c83364, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 9618ebc2188198d47a7e1a483f203958, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 668731d3ef5d2a646a35db8088c83364, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 9618ebc2188198d47a7e1a483f203958, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 668731d3ef5d2a646a35db8088c83364, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 9618ebc2188198d47a7e1a483f203958, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 668731d3ef5d2a646a35db8088c83364, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 9618ebc2188198d47a7e1a483f203958, type: 3}
+      propertyPath: 'm_Materials.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 668731d3ef5d2a646a35db8088c83364, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 9618ebc2188198d47a7e1a483f203958, type: 3}
+      propertyPath: 'm_Materials.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 668731d3ef5d2a646a35db8088c83364, type: 2}
     - target: {fileID: 919132149155446097, guid: 9618ebc2188198d47a7e1a483f203958, type: 3}
       propertyPath: m_Name
       value: "laberinto-f\xE1cil"
@@ -1628,7 +1652,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 432af99cee025ea42b411ea90fe9e3b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
