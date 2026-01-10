@@ -2,46 +2,25 @@ using UnityEngine;
 
 public class MovGiroscopio : MonoBehaviour
 {
-    [Header("Configuración de Control")]
-    public float sensibilidad = 1.5f;
-    public float suavizado = 10.0f;
-    public float maxAngulo = 18f; 
+    public float sensibilidad = 1.0f;
+    public float suavizado = 15.0f;
+    public float maxAngulo = 10f; // Ángulo pequeño para que sea estable
 
-    void Start()
+    void FixedUpdate()
     {
-        
-        if (SystemInfo.supportsGyroscope)
-        {
-            Input.gyro.enabled = true;
-        }
-
-       
-        Screen.sleepTimeout = SleepTimeout.NeverSleep;
-
-       
-        transform.localRotation = Quaternion.identity;
-    }
-
-    void Update()
-    {
-       
         Vector3 inclinacion = Input.acceleration;
 
-        
-        float targetX = inclinacion.y * maxAngulo * sensibilidad;
-        float targetZ = -inclinacion.x * maxAngulo * sensibilidad;
+        // Calculamos la rotación
+        float targetX = inclinacion.y * sensibilidad * 20f;
+        float targetZ = -inclinacion.x * sensibilidad * 20f;
 
-        
+        // Limitamos para que no sea exagerado
         targetX = Mathf.Clamp(targetX, -maxAngulo, maxAngulo);
         targetZ = Mathf.Clamp(targetZ, -maxAngulo, maxAngulo);
 
-        
         Quaternion targetRotation = Quaternion.Euler(targetX, 0, targetZ);
 
- 
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.deltaTime * suavizado);
-
-       
-        transform.localPosition = Vector3.zero;
+        // Aplicamos la rotación suave
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.fixedDeltaTime * suavizado);
     }
 }

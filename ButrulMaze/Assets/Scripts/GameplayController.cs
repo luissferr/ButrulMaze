@@ -33,11 +33,24 @@ public class GameplayController:MonoBehaviour
 
     void Update()
     {
-        if (!activo) return;
-        tiempo += Time.deltaTime;
-        txtCrono.text = tiempo.ToString("F2") + "s";
+        if (!activo) return; //
 
-        if (bola.transform.position.y < -5f) Reiniciar(); // L�gica de huecos
+        // Solo actuamos si la bola cae por debajo del nivel del suelo (ejemplo: -1.0)
+        if (bola.transform.position.y < -5.0f)
+        {
+            // En lugar de reiniciar, la "rescatamos" poniéndola un poco arriba
+            Vector3 posicionRescate = bola.transform.position;
+            posicionRescate.y = 1.0f; // La ponemos a una altura segura sobre el tablero
+            bola.transform.position = posicionRescate;
+
+            // Frenamos su velocidad de caída para que no rebote como loca
+            Rigidbody rb = bola.GetComponent<Rigidbody>();
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        }
+
+        // El resto de tu código de tiempo y gemas...
+        tiempo += Time.deltaTime; //
+        txtCrono.text = tiempo.ToString("F2") + "s"; //
     }
 
     public void RecogerGema() {
