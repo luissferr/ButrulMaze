@@ -28,8 +28,8 @@ public class MovGiroscopio : MonoBehaviour
         Vector3 inclinacion = Input.acceleration;
 
         
-        float targetX = -inclinacion.y * maxAngulo * sensibilidad;
-        float targetZ = inclinacion.x * maxAngulo * sensibilidad;
+        float targetX = inclinacion.y * maxAngulo * sensibilidad;
+        float targetZ = -inclinacion.x * maxAngulo * sensibilidad;
 
         
         targetX = Mathf.Clamp(targetX, -maxAngulo, maxAngulo);

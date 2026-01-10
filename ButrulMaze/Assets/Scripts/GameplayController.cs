@@ -64,5 +64,9 @@ public class GameplayController:MonoBehaviour
     }
 
     public void Pausar(bool p) { panelPausa.SetActive(p); Time.timeScale = p ? 0f : 1f; }
-    public void Menu() => SceneManager.LoadScene("Menu");
+    public void Menu()
+    {
+        Time.timeScale = 1f; // <-- IMPORTANTE: reactiva el tiempo
+        SceneManager.LoadScene("Menu");
+    }
 }

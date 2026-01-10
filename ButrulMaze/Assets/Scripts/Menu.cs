@@ -28,17 +28,24 @@ public class MenuSystem : MonoBehaviour
     };
 
     int colorIndex = 0;
-  
+
 
     void Start()
     {
-        ActivarPanel(pPortada);
-
-        if (PlayerPrefs.HasKey("NombreUsuario"))
-            inputNombre.text = PlayerPrefs.GetString("NombreUsuario");
-
         CargarAjustes();
         CargarSkin();
+
+        // Si ya existe un nombre, vamos directo al menú principal (pInicio)
+        if (PlayerPrefs.HasKey("NombreUsuario"))
+        {
+            inputNombre.text = PlayerPrefs.GetString("NombreUsuario");
+            txtBienvenida.text = "Hola, " + PlayerPrefs.GetString("NombreUsuario");
+            ActivarPanel(pInicio); // <-- Esto salta la portada
+        }
+        else
+        {
+            ActivarPanel(pPortada); // <-- Primera vez: muestra portada
+        }
     }
 
     // ======================
