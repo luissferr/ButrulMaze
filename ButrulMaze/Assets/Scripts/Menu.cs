@@ -180,4 +180,22 @@ public class MenuSystem : MonoBehaviour
     {
         Application.Quit();
     }
+
+    [Header("Confirmación Salida")]
+    public GameObject pConfirmarSalir; // Aquí arrastraremos el panel nuevo
+
+    public void AbrirConfirmacion()
+    {
+        pConfirmarSalir.SetActive(true); // Muestra el cartel
+    }
+
+    public void CerrarConfirmacion()
+    {
+        pConfirmarSalir.SetActive(false); // Oculta el cartel
+    }
+
+    public void SalirDefinitivo()
+    {
+        Application.Quit(); // Cierra el juego
+    }
 }
