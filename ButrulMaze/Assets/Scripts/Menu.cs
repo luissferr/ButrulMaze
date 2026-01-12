@@ -25,24 +25,24 @@ public class MenuSystem : MonoBehaviour
 
     void Start()
     {
-        // 1. Cargamos ajustes de forma segura (sin disparar el sonido de golpe)
         CargarAjustes();
         CargarSkin();
 
-        // 2. Persistencia: Comprobamos si hay usuario para saltar la portada
-        string nombreGuardado = PlayerPrefs.GetString("NombreUsuario", "");
-
-        if (!string.IsNullOrEmpty(nombreGuardado))
+        // Comprobar usuario
+        string nombre = PlayerPrefs.GetString("NombreUsuario", "");
+        if (!string.IsNullOrEmpty(nombre))
         {
-            if (inputNombre != null) inputNombre.text = nombreGuardado;
-            if (txtBienvenida != null) txtBienvenida.text = "Hola, " + nombreGuardado;
-            ActivarPanel(pInicio); // Vamos directo al Inicio
+            inputNombre.text = nombre;
+            txtBienvenida.text = "Hola, " + nombre;
+            ActivarPanel(pInicio);
         }
         else
         {
-            ActivarPanel(pPortada); // Vamos a la Portada
+            ActivarPanel(pPortada);
         }
     }
+
+
 
     public void ConfirmarUsuario()
     {
@@ -96,13 +96,10 @@ public class MenuSystem : MonoBehaviour
     // --- AJUSTES (Aquí estaba el Warning corregido) ---
     public void AjustarMusica(float v)
     {
-        PlayerPrefs.SetFloat("Vol", v);
-
-        // CORRECCIÓN: Usamos FindFirstObjectByType para quitar el warning amarillo
-        MusicManager mm = Object.FindFirstObjectByType<MusicManager>();
-        if (mm != null)
+        // Ya no guardamos aquí, dejamos que el MusicManager lo haga todo
+        if (MusicManager.instance != null)
         {
-            mm.CambiarVolumen(v);
+            MusicManager.instance.CambiarVolumen(v);
         }
     }
 
@@ -125,16 +122,13 @@ public class MenuSystem : MonoBehaviour
 
     void CargarAjustes()
     {
-        float vol = PlayerPrefs.GetFloat("Vol", 0.7f);
-        float sfx = PlayerPrefs.GetFloat("VolSFX", 0.7f);
+        float vol = PlayerPrefs.GetFloat("VolMusica", 0.7f);
         float bri = PlayerPrefs.GetFloat("Brillo", 1f);
 
-        // Usamos SetValueWithoutNotify para evitar errores al iniciar
+        // Solo ponemos el slider en su sitio visual, el MusicManager se encarga del resto
         if (sliderMusica != null) sliderMusica.SetValueWithoutNotify(vol);
-        if (sliderSFX != null) sliderSFX.SetValueWithoutNotify(sfx);
         if (sliderBrillo != null) sliderBrillo.SetValueWithoutNotify(bri);
 
-        // Aplicamos el brillo visualmente
         AjustarBrillo(bri);
     }
 

@@ -2184,9 +2184,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1310008644}
-        m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
-        m_MethodName: CambiarVolumen
+      - m_Target: {fileID: 797723077}
+        m_TargetAssemblyTypeName: MenuSystem, Assembly-CSharp
+        m_MethodName: AjustarMusica
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4628,7 +4628,7 @@ MonoBehaviour:
   clickBoton: {fileID: 8300000, guid: b384ed94097eefd4ca1786795dc00272, type: 3}
   choque: {fileID: 0}
   gema: {fileID: 8300000, guid: 12dcb4604c859644d825357924dbc3af, type: 3}
-  meta: {fileID: 0}
+  meta: {fileID: 8300000, guid: 4be48ffa342f10543a32fe6ea4ae2458, type: 3}
 --- !u!82 &922736658
 AudioSource:
   m_ObjectHideFlags: 0
