@@ -205,7 +205,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2109498993}
         m_TargetAssemblyTypeName: GameplayController, Assembly-CSharp
-        m_MethodName: Pausar
+        m_MethodName: Pausa
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1620,7 +1620,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2109498993}
         m_TargetAssemblyTypeName: GameplayController, Assembly-CSharp
-        m_MethodName: Pausar
+        m_MethodName: Pausa
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

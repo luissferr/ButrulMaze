@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameplayController : MonoBehaviour
 {
@@ -21,11 +21,11 @@ public class GameplayController : MonoBehaviour
         panelPausa.SetActive(false);
         activo = true;
         spawn = bola.transform.position;
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; // Aseguramos que el tiempo corre
+
         totales = GameObject.FindGameObjectsWithTag("Gema").Length;
         ActualizarInterfaz();
 
-        // Aplicar el color guardado en el menú a la bola real
         Color c;
         if (ColorUtility.TryParseHtmlString(PlayerPrefs.GetString("SkinColor", "#FFFFFF"), out c))
             bola.GetComponent<Renderer>().material.color = c;
@@ -34,32 +34,33 @@ public class GameplayController : MonoBehaviour
     void Update()
     {
         if (!activo) return;
-
-        // --- RESCATE SEGURO ---
-        // Ponemos -15.0f para dar margen total a la inclinación del tablero
-        if (bola.transform.position.y < -15.0f)
-        {
-            ReiniciarPosicion();
-        }
-
+        if (bola.transform.position.y < -15.0f) ReiniciarPosicion();
         tiempo += Time.deltaTime;
         txtCrono.text = tiempo.ToString("F2") + "s";
     }
 
+    public void Pausa(bool pausar)
+    {
+        activo = !pausar;
+        panelPausa.SetActive(pausar);
+        Time.timeScale = pausar ? 0f : 1f;
+    }
+
+    public void Menu()
+    {
+        Time.timeScale = 1f; // Descongelamos antes de irnos
+        SceneManager.LoadScene("Menu");
+    }
+
     public void ReiniciarPosicion()
     {
-        bola.transform.position = spawn + Vector3.up; // Aparece un poco arriba del spawn
+        bola.transform.position = spawn + Vector3.up;
         Rigidbody rb = bola.GetComponent<Rigidbody>();
-        rb.linearVelocity = Vector3.zero; // Frenamos la bola al rescatarla
+        rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
 
-    public void RecogerGema()
-    {
-        recolectadas++;
-        ActualizarInterfaz();
-    }
-
+    public void RecogerGema() { recolectadas++; ActualizarInterfaz(); }
     void ActualizarInterfaz() => txtGemas.text = "Gemas: " + recolectadas + "/" + totales;
 
     public void IntentarGanar()
@@ -68,10 +69,8 @@ public class GameplayController : MonoBehaviour
         {
             activo = false;
             PlayerPrefs.SetFloat("UltimoTiempo", tiempo);
-            SceneManager.LoadScene("Ranking");
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("Ranking"); // O donde debas ir
         }
     }
-
-    public void Pausar(bool p) { panelPausa.SetActive(p); Time.timeScale = p ? 0f : 1f; }
-    public void Menu() { Time.timeScale = 1f; SceneManager.LoadScene("Menu"); }
 }
