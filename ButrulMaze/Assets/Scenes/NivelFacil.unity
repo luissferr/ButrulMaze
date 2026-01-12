@@ -353,7 +353,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 6bfd3c2d9448e3f4ba094dec8ec61a24, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.357
+      value: -1.371
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6bfd3c2d9448e3f4ba094dec8ec61a24, type: 3}
       propertyPath: m_LocalPosition.y
@@ -425,6 +425,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bfd3c2d9448e3f4ba094dec8ec61a24, type: 3}
       insertIndex: -1
       addedObject: {fileID: 515631359}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bfd3c2d9448e3f4ba094dec8ec61a24, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 515631366}
   m_SourcePrefab: {fileID: 100100000, guid: 6bfd3c2d9448e3f4ba094dec8ec61a24, type: 3}
 --- !u!1 &515631358 stripped
 GameObject:
@@ -446,12 +449,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.4, y: 0.1, z: 0.5}
+  m_Center: {x: 0, y: 0.03, z: 0}
 --- !u!114 &515631360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,6 +473,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bfd3c2d9448e3f4ba094dec8ec61a24, type: 3}
   m_PrefabInstance: {fileID: 140144643}
   m_PrefabAsset: {fileID: 0}
+--- !u!64 &515631366
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515631358}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -951608786083511892, guid: 6bfd3c2d9448e3f4ba094dec8ec61a24, type: 3}
 --- !u!1 &556653731
 GameObject:
   m_ObjectHideFlags: 0

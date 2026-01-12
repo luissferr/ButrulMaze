@@ -1152,6 +1152,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bfd3c2d9448e3f4ba094dec8ec61a24, type: 3}
       insertIndex: -1
       addedObject: {fileID: 613870412}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bfd3c2d9448e3f4ba094dec8ec61a24, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 613870413}
   m_SourcePrefab: {fileID: 100100000, guid: 6bfd3c2d9448e3f4ba094dec8ec61a24, type: 3}
 --- !u!1 &613870409 stripped
 GameObject:
@@ -1173,12 +1176,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.5, y: 0.2, z: 0.5}
+  m_Center: {x: 0, y: -0.06, z: 0}
 --- !u!4 &613870411 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6bfd3c2d9448e3f4ba094dec8ec61a24, type: 3}
@@ -1197,6 +1200,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Meta
   idMaterialTela: 2
+--- !u!64 &613870413
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613870409}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -951608786083511892, guid: 6bfd3c2d9448e3f4ba094dec8ec61a24, type: 3}
 --- !u!1 &879959600
 GameObject:
   m_ObjectHideFlags: 0
