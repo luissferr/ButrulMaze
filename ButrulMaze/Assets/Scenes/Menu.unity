@@ -3513,7 +3513,7 @@ MonoBehaviour:
   pCreditos: {fileID: 519831905}
   pTutorial: {fileID: 1393908087}
   inputNombre: {fileID: 819921150}
-  txtBienvenida: {fileID: 0}
+  txtBienvenida: {fileID: 1614030261}
   sliderMusica: {fileID: 448125392}
   sliderBrillo: {fileID: 1412737537}
   filtroBrillo: {fileID: 1283279987}
@@ -7574,7 +7574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -14}
+  m_AnchoredPosition: {x: 0, y: -14.0000305}
   m_SizeDelta: {x: 0, y: 526.19995}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1891319955
