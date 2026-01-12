@@ -255,7 +255,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xBFest\xE1s seguro de\n que quieres salir?"
+  m_text: "\xBFEst\xE1s seguro de\n que quieres salir?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef5c90b5e8a67474baebe417b3502044, type: 2}
   m_sharedMaterial: {fileID: 9219616860751007474, guid: ef5c90b5e8a67474baebe417b3502044, type: 2}
@@ -2647,7 +2647,7 @@ RectTransform:
   m_GameObject: {fileID: 641157042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.218151, y: 2.218151, z: 2.218151}
+  m_LocalScale: {x: 2.31, y: 2.218151, z: 2.218151}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 918563289}
@@ -3512,13 +3512,12 @@ MonoBehaviour:
   pOpciones: {fileID: 66102763}
   pCreditos: {fileID: 519831905}
   pTutorial: {fileID: 1393908087}
-  pConfirmarSalir: {fileID: 2011008012}
   inputNombre: {fileID: 819921150}
   txtBienvenida: {fileID: 1614030261}
   sliderMusica: {fileID: 448125392}
   sliderBrillo: {fileID: 1412737537}
-  filtroBrillo: {fileID: 1283279987}
-  bolaPreview: {fileID: 1780415869}
+  filtroBrillo: {fileID: 216149605}
+  previewColor: {fileID: 1976941414}
   textoSkin: {fileID: 1680716376}
   coloresHex:
   - '#FF0000'
@@ -3527,6 +3526,8 @@ MonoBehaviour:
   - '#FFFF00'
   - '#FF00FF'
   - '#00FFFF'
+  delay: 0.2
+  pConfirmarSalir: {fileID: 2011008012}
 --- !u!4 &797723078
 Transform:
   m_ObjectHideFlags: 0
@@ -3975,7 +3976,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 1920}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -7689,7 +7690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -14.0000305}
+  m_AnchoredPosition: {x: 0, y: -14}
   m_SizeDelta: {x: 0, y: 526.19995}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1891319955

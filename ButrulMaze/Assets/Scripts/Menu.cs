@@ -5,8 +5,7 @@ using UnityEngine.UI;
 public class MenuSystem : MonoBehaviour
 {
     [Header("Paneles")]
-    public GameObject pPortada;
-    public GameObject pRegistro, pInicio, pConfigPartida, pOpciones, pCreditos, pTutorial, pConfirmarSalir;
+    public GameObject pPortada, pRegistro, pInicio, pConfigPartida, pOpciones, pCreditos, pTutorial;
 
     [Header("Usuario")]
     public InputField inputNombre;
@@ -17,50 +16,104 @@ public class MenuSystem : MonoBehaviour
     public Image filtroBrillo;
 
     [Header("Skin (color)")]
-    public Renderer bolaPreview; // <--- ARRASTRA AQUÍ LA BOLA 3D DE LA ESCENA
+    public Image previewColor;
     public Text textoSkin;
-    public string[] coloresHex = { "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF" };
+    public string[] coloresHex = {
+        "#FF0000", // Rojo
+        "#00FF00", // Verde
+        "#0000FF", // Azul
+        "#FFFF00", // Amarillo
+        "#FF00FF", // Magenta
+        "#00FFFF"  // Cian
+    };
+
     int colorIndex = 0;
+
 
     void Start()
     {
         CargarAjustes();
         CargarSkin();
 
+        // Si ya existe un nombre, vamos directo al menú principal (pInicio)
         if (PlayerPrefs.HasKey("NombreUsuario"))
         {
             inputNombre.text = PlayerPrefs.GetString("NombreUsuario");
             txtBienvenida.text = "Hola, " + PlayerPrefs.GetString("NombreUsuario");
-            ActivarPanel(pInicio);
+            ActivarPanel(pInicio); // <-- Esto salta la portada
         }
         else
         {
-            ActivarPanel(pPortada);
+            ActivarPanel(pPortada); // <-- Primera vez: muestra portada
         }
     }
 
+    // ======================
+    // NAVEGACIÓN DE MENÚ
+    // ======================
+
+    public void IrARegistro() => ActivarPanel(pRegistro);
+    public void IrAConfig() => ActivarPanel(pConfigPartida);
+    public void IrAOpciones() => ActivarPanel(pOpciones);
+    public void IrACreditos() => ActivarPanel(pCreditos);
+    public void IrATutorial() => ActivarPanel(pTutorial);
+    public void VolverAlInicio() => ActivarPanel(pInicio);
+
     public void ConfirmarUsuario()
     {
-        if (inputNombre == null || string.IsNullOrEmpty(inputNombre.text)) return;
+        if (string.IsNullOrEmpty(inputNombre.text)) return;
 
+        // Guardamos el nombre en la memoria
         PlayerPrefs.SetString("NombreUsuario", inputNombre.text);
+
+        // ESTA ES LA LÍNEA QUE FALTA: Fuerza a Unity a escribir el archivo en el disco
+        PlayerPrefs.Save();
+
         txtBienvenida.text = "Hola, " + inputNombre.text;
         ActivarPanel(pInicio);
     }
 
+    // ======================
+    // DIFICULTAD
+    // ======================
+
+    public void SeleccionarDificultad(int d)
+    {
+        PlayerPrefs.SetInt("Dificultad", d);
+    }
+
+    // ======================
+    // SKIN (ROTACIÓN)
+    // ======================
+    float lastClick;
+    public float delay = 0.2f;
     public void CambiarSkin()
     {
+        if (Time.time - lastClick < delay) return;
+        lastClick = Time.time;
         colorIndex = (colorIndex + 1) % coloresHex.Length;
+
+
         string hex = coloresHex[colorIndex];
         PlayerPrefs.SetString("SkinColor", hex);
+
         AplicarPreview(hex);
     }
 
     void CargarSkin()
     {
-        string guardado = PlayerPrefs.GetString("SkinColor", coloresHex[0]);
-        colorIndex = System.Array.IndexOf(coloresHex, guardado);
-        if (colorIndex < 0) colorIndex = 0;
+        if (PlayerPrefs.HasKey("SkinColor"))
+        {
+            string guardado = PlayerPrefs.GetString("SkinColor");
+            colorIndex = System.Array.IndexOf(coloresHex, guardado);
+            if (colorIndex < 0) colorIndex = 0;
+        }
+        else
+        {
+            PlayerPrefs.SetString("SkinColor", coloresHex[0]);
+            colorIndex = 0;
+        }
+
         AplicarPreview(coloresHex[colorIndex]);
     }
 
@@ -68,15 +121,15 @@ public class MenuSystem : MonoBehaviour
     {
         Color c;
         if (ColorUtility.TryParseHtmlString(hex, out c))
-        {
-            if (bolaPreview != null) bolaPreview.material.color = c; // <--- CAMBIO CLAVE
-        }
+            previewColor.color = c;
 
         if (textoSkin != null)
             textoSkin.text = $"Skin {colorIndex + 1}/{coloresHex.Length}";
     }
 
-    public void SeleccionarDificultad(int d) => PlayerPrefs.SetInt("Dificultad", d);
+    // ======================
+    // JUGAR
+    // ======================
 
     public void Jugar()
     {
@@ -85,35 +138,69 @@ public class MenuSystem : MonoBehaviour
         SceneManager.LoadScene(niveles[d]);
     }
 
-    // --- NAVEGACIÓN ---
-    public void IrARegistro() => ActivarPanel(pRegistro);
-    public void IrAConfig() => ActivarPanel(pConfigPartida);
-    public void IrAOpciones() => ActivarPanel(pOpciones);
-    public void IrACreditos() => ActivarPanel(pCreditos);
-    public void IrATutorial() => ActivarPanel(pTutorial);
-    public void VolverAlInicio() => ActivarPanel(pInicio);
+    // ======================
+    // OPCIONES
+    // ======================
 
-    void ActivarPanel(GameObject p)
+    public void AjustarMusica(float v)
     {
-        pPortada.SetActive(false); pRegistro.SetActive(false); pInicio.SetActive(false);
-        pConfigPartida.SetActive(false); pOpciones.SetActive(false); pCreditos.SetActive(false);
-        pTutorial.SetActive(false);
-        if (pConfirmarSalir != null) pConfirmarSalir.SetActive(false);
-        p.SetActive(true);
+        PlayerPrefs.SetFloat("Vol", v);
+        AudioListener.volume = v;
     }
 
-    // --- OPCIONES ---
-    public void AjustarMusica(float v) { PlayerPrefs.SetFloat("Vol", v); AudioListener.volume = v; }
     public void AjustarBrillo(float v)
     {
         PlayerPrefs.SetFloat("Brillo", v);
-        Color c = filtroBrillo.color; c.a = 1f - v; filtroBrillo.color = c;
+        Color c = filtroBrillo.color;
+        c.a = 1f - v;
+        filtroBrillo.color = c;
     }
+
     void CargarAjustes()
     {
         sliderMusica.value = PlayerPrefs.GetFloat("Vol", 0.7f);
         sliderBrillo.value = PlayerPrefs.GetFloat("Brillo", 1f);
-        AjustarMusica(sliderMusica.value); AjustarBrillo(sliderBrillo.value);
+        AjustarMusica(sliderMusica.value);
+        AjustarBrillo(sliderBrillo.value);
     }
-    public void Salir() => Application.Quit();
+
+    // ======================
+    // UTILIDADES
+    // ======================
+
+    void ActivarPanel(GameObject p)
+    {
+        pPortada.SetActive(false);
+        pRegistro.SetActive(false);
+        pInicio.SetActive(false);
+        pConfigPartida.SetActive(false);
+        pOpciones.SetActive(false);
+        pCreditos.SetActive(false);
+        pTutorial.SetActive(false);
+
+        p.SetActive(true);
+    }
+
+    public void Salir()
+    {
+        Application.Quit();
+    }
+
+    [Header("Confirmación Salida")]
+    public GameObject pConfirmarSalir; // Aquí arrastraremos el panel nuevo
+
+    public void AbrirConfirmacion()
+    {
+        pConfirmarSalir.SetActive(true); // Muestra el cartel
+    }
+
+    public void CerrarConfirmacion()
+    {
+        pConfirmarSalir.SetActive(false); // Oculta el cartel
+    }
+
+    public void SalirDefinitivo()
+    {
+        Application.Quit(); // Cierra el juego
+    }
 }
