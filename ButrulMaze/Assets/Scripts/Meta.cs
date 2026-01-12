@@ -66,8 +66,12 @@ public class Meta : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if (SoundManager.instance != null)
+                SoundManager.instance.Meta();
+
             if (GameplayController.instance.recolectadas >= GameplayController.instance.totales)
                 GameplayController.instance.IntentarGanar();
+
             else
                 Debug.Log("¡Faltan gemas! La bandera sigue roja.");
         }

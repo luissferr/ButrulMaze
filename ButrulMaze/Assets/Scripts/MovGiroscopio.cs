@@ -33,4 +33,13 @@ public class MovGiroscopio : MonoBehaviour
         // Aplicamos la rotación suavemente
         transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.fixedDeltaTime * suavizado);
     }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.CompareTag("Pared"))
+        {
+            if (SoundManager.instance != null)
+                SoundManager.instance.Choque();
+        }
+    }
 }

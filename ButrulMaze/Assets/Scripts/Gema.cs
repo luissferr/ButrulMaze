@@ -7,6 +7,10 @@ public class Gema:MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameplayController.instance.RecogerGema();
+
+            if (SoundManager.instance != null)
+                SoundManager.instance.Gema();
+
             Destroy(gameObject);
         }
     }
