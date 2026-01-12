@@ -12,7 +12,7 @@ public class MenuSystem : MonoBehaviour
     public Text txtBienvenida;
 
     [Header("Opciones")]
-    public Slider sliderMusica, sliderBrillo;
+    public Slider sliderMusica, sliderBrillo, sliderSFX;
     public Image filtroBrillo;
 
     [Header("Skin (color)")]
@@ -35,12 +35,17 @@ public class MenuSystem : MonoBehaviour
         CargarAjustes();
         CargarSkin();
 
+        sliderMusica.value = PlayerPrefs.GetFloat("VolMusica", 0.7f);
+        sliderSFX.value = PlayerPrefs.GetFloat("VolSFX", 0.7f);
+
+        string nombre = PlayerPrefs.GetString("NombreUsuario", "");
+
         // Si ya existe un nombre, vamos directo al menú principal (pInicio)
-        if (PlayerPrefs.HasKey("NombreUsuario"))
+        if (!string.IsNullOrEmpty(nombre))
         {
-            inputNombre.text = PlayerPrefs.GetString("NombreUsuario");
-            txtBienvenida.text = "Hola, " + PlayerPrefs.GetString("NombreUsuario");
-            ActivarPanel(pInicio); // <-- Esto salta la portada
+           inputNombre.text = nombre;
+        txtBienvenida.text = "Hola, " + nombre;
+        ActivarPanel(pInicio);
         }
         else
         {
@@ -144,8 +149,16 @@ public class MenuSystem : MonoBehaviour
 
     public void AjustarMusica(float v)
     {
-        PlayerPrefs.SetFloat("Vol", v);
-        AudioListener.volume = v;
+  
+
+        if (MusicManager.instance != null)
+            MusicManager.instance.CambiarVolumen(v);
+    }
+
+    public void AjustarSFX(float v)
+    {
+        if (SoundManager.instance != null)
+            SoundManager.instance.CambiarVolumen(v);
     }
 
     public void AjustarBrillo(float v)
