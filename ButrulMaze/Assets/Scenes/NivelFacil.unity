@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 73400889}
   m_Layer: 0
   m_Name: bordederecho
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 125921468}
   m_Layer: 0
   m_Name: bordeinferior
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1115,7 +1115,7 @@ GameObject:
   - component: {fileID: 1141673928}
   m_Layer: 0
   m_Name: baseInferior
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1381,7 +1381,7 @@ GameObject:
   - component: {fileID: 1307463255}
   m_Layer: 0
   m_Name: bordesuperior
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1554,6 +1554,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9618ebc2188198d47a7e1a483f203958, type: 3}
       propertyPath: m_Name
       value: "laberinto-f\xE1cil"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9618ebc2188198d47a7e1a483f203958, type: 3}
+      propertyPath: m_TagString
+      value: Pared
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2051,7 +2055,7 @@ GameObject:
   - component: {fileID: 1559929394}
   m_Layer: 0
   m_Name: baseSuperior
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2414,6 +2418,7 @@ GameObject:
   - component: {fileID: 1908926934}
   - component: {fileID: 1908926940}
   - component: {fileID: 1908926939}
+  - component: {fileID: 1908926941}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Player
@@ -2553,6 +2558,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &1908926941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908926933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a35584b6532a044b1b80680bd7cdbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BallSound
 --- !u!1 &1915113804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2567,7 +2584,7 @@ GameObject:
   - component: {fileID: 1915113806}
   m_Layer: 0
   m_Name: bordeizquierdo
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

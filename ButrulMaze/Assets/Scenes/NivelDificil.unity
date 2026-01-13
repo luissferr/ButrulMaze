@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 42152581}
   m_Layer: 0
   m_Name: bordeizquierdo
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 312852789}
   m_Layer: 0
   m_Name: bordeinferior
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1879,7 +1879,7 @@ GameObject:
   - component: {fileID: 1326939360}
   m_Layer: 0
   m_Name: bordederecho
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2111,6 +2111,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 08405ffad543eba4e82a10a2d59c200b, type: 3}
       propertyPath: m_Name
       value: laberinto-difi
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08405ffad543eba4e82a10a2d59c200b, type: 3}
+      propertyPath: m_TagString
+      value: Pared
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2701,7 +2705,7 @@ GameObject:
   - component: {fileID: 1815354863}
   m_Layer: 0
   m_Name: baseInferior
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2935,7 +2939,7 @@ GameObject:
   - component: {fileID: 1880251297}
   m_Layer: 0
   m_Name: bordesuperior
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3047,6 +3051,7 @@ GameObject:
   - component: {fileID: 1908926934}
   - component: {fileID: 1908926938}
   - component: {fileID: 1908926939}
+  - component: {fileID: 1908926940}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Player
@@ -3186,6 +3191,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 799464e54f04f47409a46b8de4b1fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerColor
+--- !u!114 &1908926940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908926933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a35584b6532a044b1b80680bd7cdbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BallSound
 --- !u!1 &2109498992
 GameObject:
   m_ObjectHideFlags: 0

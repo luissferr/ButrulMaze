@@ -17,7 +17,7 @@ public class MenuSystem : MonoBehaviour
     public Image filtroBrillo;
 
     [Header("Skin (color)")]
-    public Image previewColor;
+    public Renderer bolaPreview;
     public Text textoSkin;
     public string[] coloresHex = { "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF" };
 
@@ -81,8 +81,12 @@ public class MenuSystem : MonoBehaviour
     {
         Color c;
         if (ColorUtility.TryParseHtmlString(hex, out c))
-            if (previewColor != null) previewColor.color = c;
+        {
+            if (bolaPreview != null)
+                bolaPreview.material.color = c;
+        }
     }
+
 
     void CargarSkin()
     {
@@ -105,8 +109,10 @@ public class MenuSystem : MonoBehaviour
 
     public void AjustarSFX(float v)
     {
-        PlayerPrefs.SetFloat("VolSFX", v);
-        // Aquí llamarías a tu SoundManager si lo tienes
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.CambiarVolumen(v);
+        }
     }
 
     public void AjustarBrillo(float v)
@@ -124,13 +130,15 @@ public class MenuSystem : MonoBehaviour
     {
         float vol = PlayerPrefs.GetFloat("VolMusica", 0.7f);
         float bri = PlayerPrefs.GetFloat("Brillo", 1f);
+        float sfx = PlayerPrefs.GetFloat("VolSFX", 0.7f);
 
-        // Solo ponemos el slider en su sitio visual, el MusicManager se encarga del resto
         if (sliderMusica != null) sliderMusica.SetValueWithoutNotify(vol);
         if (sliderBrillo != null) sliderBrillo.SetValueWithoutNotify(bri);
+        if (sliderSFX != null) sliderSFX.SetValueWithoutNotify(sfx);
 
         AjustarBrillo(bri);
     }
+
 
     // --- GESTOR DE PANELES ---
     void ActivarPanel(GameObject p)

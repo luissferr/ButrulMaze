@@ -64,16 +64,22 @@ public class Meta : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player")) return;
+
+        // SOLO si ya está desbloqueada (todas las gemas recogidas)
+        if (GameplayController.instance.recolectadas >= GameplayController.instance.totales)
         {
+            // Sonido de victoria
             if (SoundManager.instance != null)
                 SoundManager.instance.Meta();
 
-            if (GameplayController.instance.recolectadas >= GameplayController.instance.totales)
-                GameplayController.instance.IntentarGanar();
-
-            else
-                Debug.Log("¡Faltan gemas! La bandera sigue roja.");
+            // Ganar partida
+            GameplayController.instance.IntentarGanar();
+        }
+        else
+        {
+            Debug.Log("¡Faltan gemas! La bandera sigue roja.");
         }
     }
+
 }
