@@ -126,14 +126,10 @@ public class MenuSystem : MonoBehaviour
 
     public void AjustarBrillo(float v)
     {
-        PlayerPrefs.SetFloat("Brillo", v);
-        if (filtroBrillo != null)
-        {
-            Color c = filtroBrillo.color;
-            c.a = 1f - v;
-            filtroBrillo.color = c;
-        }
+        if (BrightnessManager.instance != null)
+            BrightnessManager.instance.AplicarBrillo(v);
     }
+
 
     void CargarAjustes()
     {
