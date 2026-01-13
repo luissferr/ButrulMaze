@@ -30,6 +30,8 @@ public class MenuSystem : MonoBehaviour
 
     void Start()
     {
+        Random.InitState((int)System.DateTime.Now.Ticks);
+
         CargarAjustes();
         CargarSkin();
 
@@ -104,10 +106,10 @@ public class MenuSystem : MonoBehaviour
 
     void ActualizarTextoColor() { if (textoSkin != null) textoSkin.text = "Color: " + (colorIndex + 1); }
 
-    // --- AJUSTES (Aquí estaba el Warning corregido) ---
+    // --- AJUSTES  ---
     public void AjustarMusica(float v)
     {
-        // Ya no guardamos aquí, dejamos que el MusicManager lo haga todo
+        
         if (MusicManager.instance != null)
         {
             MusicManager.instance.CambiarVolumen(v);
@@ -179,26 +181,27 @@ public class MenuSystem : MonoBehaviour
 
     private void CargarEscenaAlAzar(string[] lista)
     {
-        if (lista != null && lista.Length > 0)
+        if (lista != null && lista.Length > 1)
         {
-            int indice = Random.Range(0, lista.Length);
-            SceneManager.LoadScene(lista[indice]);
+            // Recuperamos el índice del último nivel jugado para no repetirlo
+            int ultimoIndice = PlayerPrefs.GetInt("UltimoIndice_" + lista[0], -1);
+            int nuevoIndice;
+
+            do
+            {
+                nuevoIndice = Random.Range(0, lista.Length);
+            } while (nuevoIndice == ultimoIndice);
+
+            // Guardamos el nuevo índice antes de cargar
+            PlayerPrefs.SetInt("UltimoIndice_" + lista[0], nuevoIndice);
+            SceneManager.LoadScene(lista[nuevoIndice]);
         }
-        else
+        else if (lista != null && lista.Length == 1)
         {
-            Debug.LogWarning("¡Ojo! La lista de escenas está vacía en el Inspector.");
+            SceneManager.LoadScene(lista[0]);
         }
     }
 
-
-    /*// --- JUGAR ---
-    public void Jugar()
-    {
-        int d = PlayerPrefs.GetInt("Dificultad", 0);
-        string[] niveles = { "NivelFacil", "NivelMedio", "NivelDificil" };
-        if (d < niveles.Length) SceneManager.LoadScene(niveles[d]);
-    }
-    */
     public void SeleccionarDificultad(int d) { PlayerPrefs.SetInt("Dificultad", d); }
 
 

@@ -28,10 +28,10 @@ public class RankingManager : MonoBehaviour
             string claveRecord = escena + "_Record_" + i;
             string claveNombre = escena + "_Nombre_" + i;
 
-            float t = PlayerPrefs.GetFloat(claveRecord, 999.9f);
+            float t = PlayerPrefs.GetFloat(claveRecord, 99999f);
             string n = PlayerPrefs.GetString(claveNombre, "---");
 
-            string tiempoTexto = (t >= 999) ? "---" : t.ToString("F2") + "s";
+            string tiempoTexto = (t >= 99999) ? "---" : t.ToString("F2") + "s";
             tabla += i + ". " + n + " - " + tiempoTexto + "\n";
         }
 

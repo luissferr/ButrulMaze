@@ -79,34 +79,41 @@ public class GameplayController : MonoBehaviour
         activo = false;
         string nombreEscena = SceneManager.GetActiveScene().name;
         float tiempoFinal = tiempo;
-        // Forzamos la recuperación del nombre
         string nombreJugador = PlayerPrefs.GetString("NombreUsuario", "Jugador");
 
+        // Guardamos los datos de la partida actual para la UI de esta sesión
         PlayerPrefs.SetFloat("UltimoTiempo", tiempoFinal);
         PlayerPrefs.SetString("UltimaEscena", nombreEscena);
 
-        // Lógica de Ranking Top 3 por Escena
+        // --- LÓGICA DE RANKING TOP 3 PERSISTENTE ---
         for (int i = 1; i <= 3; i++)
         {
             string claveRecord = nombreEscena + "_Record_" + i;
             string claveNombre = nombreEscena + "_Nombre_" + i;
 
-            float recordGuardado = PlayerPrefs.GetFloat(claveRecord, 999.9f);
+            // Usamos un valor muy alto para que cualquier tiempo entre la primera vez
+            float recordGuardado = PlayerPrefs.GetFloat(claveRecord, 99999f);
 
             if (tiempoFinal < recordGuardado)
             {
-                // Desplazar récords antiguos hacia abajo
+                // DESPLAZAMIENTO: Movemos los puestos de abajo hacia el final
+                // Si entramos en el puesto 1, el 2 pasa al 3, y el 1 pasa al 2.
                 for (int j = 3; j > i; j--)
                 {
-                    PlayerPrefs.SetFloat(nombreEscena + "_Record_" + j, PlayerPrefs.GetFloat(nombreEscena + "_Record_" + (j - 1), 999.9f));
-                    PlayerPrefs.SetString(nombreEscena + "_Nombre_" + j, PlayerPrefs.GetString(nombreEscena + "_Nombre_" + (j - 1), "---"));
+                    string anteriorRecord = nombreEscena + "_Record_" + (j - 1);
+                    string anteriorNombre = nombreEscena + "_Nombre_" + (j - 1);
+
+                    PlayerPrefs.SetFloat(nombreEscena + "_Record_" + j, PlayerPrefs.GetFloat(anteriorRecord, 99999f));
+                    PlayerPrefs.SetString(nombreEscena + "_Nombre_" + j, PlayerPrefs.GetString(anteriorNombre, "---"));
                 }
-                // Guardar el nuevo
+
+                // INSERTAR: Guardamos el nuevo récord en la posición i
                 PlayerPrefs.SetFloat(claveRecord, tiempoFinal);
                 PlayerPrefs.SetString(claveNombre, nombreJugador);
-                break;
+
+                break; // Salimos del bucle tras insertar el récord
             }
         }
-        PlayerPrefs.Save();
+        PlayerPrefs.Save(); // Forzamos la persistencia en el disco
     }
 }
