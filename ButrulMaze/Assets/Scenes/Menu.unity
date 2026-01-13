@@ -3917,6 +3917,18 @@ MonoBehaviour:
   - '#FFFF00'
   - '#FF00FF'
   - '#00FFFF'
+  escenasFaciles:
+  - NivelFacil
+  - NivelFacil2
+  - NivelFacil3
+  escenasMedias:
+  - NivelMedio
+  - NivelMedio2
+  - NivelMedio3
+  escenasDificiles:
+  - NivelDificil
+  - NivelDificil2
+  - NivelDificil3
 --- !u!4 &797723078
 Transform:
   m_ObjectHideFlags: 0
@@ -5922,9 +5934,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 797723077}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: SeleccionarDificultad
-        m_Mode: 3
+        m_TargetAssemblyTypeName: MenuSystem, Assembly-CSharp
+        m_MethodName: JugarDificil
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6492,9 +6504,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 797723077}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: SeleccionarDificultad
-        m_Mode: 3
+        m_TargetAssemblyTypeName: MenuSystem, Assembly-CSharp
+        m_MethodName: JugarMedio
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8753,9 +8765,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 797723077}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: SeleccionarDificultad
-        m_Mode: 3
+        m_TargetAssemblyTypeName: MenuSystem, Assembly-CSharp
+        m_MethodName: JugarFacil
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

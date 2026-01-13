@@ -15,11 +15,29 @@ EditorBuildSettings:
     path: Assets/Scenes/NivelFacil.unity
     guid: a2940d95963e1b34d9df23d3858e2ae8
   - enabled: 1
+    path: Assets/Scenes/NivelFacil2.unity
+    guid: aba08be69eb768f428d79433047858d4
+  - enabled: 1
+    path: Assets/Scenes/NivelFacil3.unity
+    guid: a2d6b96abdf3eb74ebbde852913b7e60
+  - enabled: 1
     path: Assets/Scenes/NivelMedio.unity
     guid: 78533a15a59b82741826587f1026636b
   - enabled: 1
+    path: Assets/Scenes/NivelMedio2.unity
+    guid: 637e28779b5554d4f84bcee95e5371da
+  - enabled: 1
+    path: Assets/Scenes/NivelMedio3.unity
+    guid: fedd724690719f34ba007abfe7178889
+  - enabled: 1
     path: Assets/Scenes/NivelDificil.unity
     guid: bf4eabe3e70eea441a436bd16a546214
+  - enabled: 1
+    path: Assets/Scenes/NivelDificil2.unity
+    guid: 572304891ae6837488d25c96dd3c79c1
+  - enabled: 1
+    path: Assets/Scenes/NivelDificil3.unity
+    guid: 92a2845fd8e02ce419695718036a2835
   - enabled: 1
     path: Assets/Scenes/Ranking.unity
     guid: 3f7e13ff1fb394a47956b22542169bb0

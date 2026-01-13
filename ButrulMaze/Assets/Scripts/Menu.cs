@@ -23,6 +23,11 @@ public class MenuSystem : MonoBehaviour
 
     int colorIndex = 0;
 
+    [Header("Nivel Aleatorio")]
+    public string[] escenasFaciles = { "NivelFacil", "NivelFacil2", "NivelFacil3" };
+    public string[] escenasMedias = { "NivelMedio", "NivelMedio2", "NivelMedio3" };
+    public string[] escenasDificiles = { "NivelDificil", "NivelDificil2", "NivelDificil3" };
+
     void Start()
     {
         CargarAjustes();
@@ -155,13 +160,42 @@ public class MenuSystem : MonoBehaviour
         if (p != null) p.SetActive(true);
     }
 
-    // --- JUGAR ---
+    public void JugarFacil()
+    {
+        CargarEscenaAlAzar(escenasFaciles);
+    }
+
+    public void JugarMedio()
+    {
+        CargarEscenaAlAzar(escenasMedias);
+    }
+
+    public void JugarDificil()
+    {
+        CargarEscenaAlAzar(escenasDificiles);
+    }
+
+    private void CargarEscenaAlAzar(string[] lista)
+    {
+        if (lista != null && lista.Length > 0)
+        {
+            int indice = Random.Range(0, lista.Length);
+            SceneManager.LoadScene(lista[indice]);
+        }
+        else
+        {
+            Debug.LogWarning("¡Ojo! La lista de escenas está vacía en el Inspector.");
+        }
+    }
+
+
+    /*// --- JUGAR ---
     public void Jugar()
     {
         int d = PlayerPrefs.GetInt("Dificultad", 0);
         string[] niveles = { "NivelFacil", "NivelMedio", "NivelDificil" };
         if (d < niveles.Length) SceneManager.LoadScene(niveles[d]);
     }
-
+    */
     public void SeleccionarDificultad(int d) { PlayerPrefs.SetInt("Dificultad", d); }
 }
