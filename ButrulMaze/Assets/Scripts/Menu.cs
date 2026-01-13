@@ -54,9 +54,11 @@ public class MenuSystem : MonoBehaviour
         if (string.IsNullOrEmpty(inputNombre.text)) return;
 
         PlayerPrefs.SetString("NombreUsuario", inputNombre.text);
-        PlayerPrefs.Save(); // Guardado físico asegurado
+        PlayerPrefs.Save();
 
+        // Actualiza el texto para que el nuevo usuario vea su nombre al instante
         if (txtBienvenida != null) txtBienvenida.text = "Hola, " + inputNombre.text;
+
         ActivarPanel(pInicio);
     }
 
@@ -198,4 +200,18 @@ public class MenuSystem : MonoBehaviour
     }
     */
     public void SeleccionarDificultad(int d) { PlayerPrefs.SetInt("Dificultad", d); }
+
+
+    public void CambiarDeUsuario()
+    {
+        // 1. Borramos el nombre actual para que al reiniciar no salte el registro
+        PlayerPrefs.SetString("NombreUsuario", "");
+        PlayerPrefs.Save();
+
+        // 2. Limpiamos el InputField para el siguiente usuario
+        if (inputNombre != null) inputNombre.text = "";
+
+        // 3. Volvemos al panel de Registro/Portada
+        ActivarPanel(pRegistro);
+    }
 }

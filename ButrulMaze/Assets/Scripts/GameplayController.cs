@@ -73,4 +73,40 @@ public class GameplayController : MonoBehaviour
             SceneManager.LoadScene("Ranking"); // O donde debas ir
         }
     }
+
+    public void RegistrarVictoria()
+    {
+        activo = false;
+        string nombreEscena = SceneManager.GetActiveScene().name;
+        float tiempoFinal = tiempo;
+        // Forzamos la recuperación del nombre
+        string nombreJugador = PlayerPrefs.GetString("NombreUsuario", "Jugador");
+
+        PlayerPrefs.SetFloat("UltimoTiempo", tiempoFinal);
+        PlayerPrefs.SetString("UltimaEscena", nombreEscena);
+
+        // Lógica de Ranking Top 3 por Escena
+        for (int i = 1; i <= 3; i++)
+        {
+            string claveRecord = nombreEscena + "_Record_" + i;
+            string claveNombre = nombreEscena + "_Nombre_" + i;
+
+            float recordGuardado = PlayerPrefs.GetFloat(claveRecord, 999.9f);
+
+            if (tiempoFinal < recordGuardado)
+            {
+                // Desplazar récords antiguos hacia abajo
+                for (int j = 3; j > i; j--)
+                {
+                    PlayerPrefs.SetFloat(nombreEscena + "_Record_" + j, PlayerPrefs.GetFloat(nombreEscena + "_Record_" + (j - 1), 999.9f));
+                    PlayerPrefs.SetString(nombreEscena + "_Nombre_" + j, PlayerPrefs.GetString(nombreEscena + "_Nombre_" + (j - 1), "---"));
+                }
+                // Guardar el nuevo
+                PlayerPrefs.SetFloat(claveRecord, tiempoFinal);
+                PlayerPrefs.SetString(claveNombre, nombreJugador);
+                break;
+            }
+        }
+        PlayerPrefs.Save();
+    }
 }

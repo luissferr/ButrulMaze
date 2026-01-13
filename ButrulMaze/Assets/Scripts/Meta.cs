@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Meta : MonoBehaviour
 {
@@ -73,13 +74,18 @@ public class Meta : MonoBehaviour
             if (SoundManager.instance != null)
                 SoundManager.instance.Meta();
 
-            // Ganar partida
-            GameplayController.instance.IntentarGanar();
+            // 1. Guardamos los datos en el ranking (específico para esta escena)
+            GameplayController.instance.RegistrarVictoria();
+
+            // 2. Esperamos 2 segundos para que el jugador vea la bandera y suene el audio
+            // y luego saltamos a la escena de Ranking
+            Invoke("IrAlRanking", 2f);
         }
-        else
-        {
-            Debug.Log("¡Faltan gemas! La bandera sigue roja.");
-        }
+    }
+
+    void IrAlRanking()
+    {
+        SceneManager.LoadScene("Ranking");
     }
 
 }
