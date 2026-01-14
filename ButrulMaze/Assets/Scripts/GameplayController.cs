@@ -61,7 +61,7 @@ public class GameplayController : MonoBehaviour
     }
 
     public void RecogerGema() { recolectadas++; ActualizarInterfaz(); }
-    void ActualizarInterfaz() => txtGemas.text = "Gemas: " + recolectadas + "/" + totales;
+    void ActualizarInterfaz() => txtGemas.text =  recolectadas + "/" + totales;
 
     public void IntentarGanar()
     {
