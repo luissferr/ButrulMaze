@@ -11,17 +11,17 @@ public class RankingManager : MonoBehaviour
 
     void Start()
     {
-        // 1. Recuperamos los datos guardados
+       
         string escena = PlayerPrefs.GetString("UltimaEscena", "Nivel Desconocido");
         float tuTiempo = PlayerPrefs.GetFloat("UltimoTiempo", 0f);
         string nombreUser = PlayerPrefs.GetString("NombreUsuario", "Jugador");
 
-        // 2. Asignamos textos principales
+        
         if (txtTituloNivel != null) txtTituloNivel.text = "Tablero: " + escena;
         if (txtTuTiempo != null) txtTuTiempo.text = nombreUser + ": " + tuTiempo.ToString("F2") + "s";
 
-        // 3. Construimos la tabla de posiciones
-        string tabla = ""; // Declaramos la variable AQUÍ para que exista en todo el método
+        
+        string tabla = ""; 
 
         for (int i = 1; i <= 3; i++)
         {
@@ -35,7 +35,6 @@ public class RankingManager : MonoBehaviour
             tabla += i + ". " + n + " - " + tiempoTexto + "\n";
         }
 
-        // 4. Asignamos la tabla al texto de la UI
         if (txtTiemposTop != null)
         {
             txtTiemposTop.text = tabla;

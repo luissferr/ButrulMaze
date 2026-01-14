@@ -67,7 +67,6 @@ public class MenuSystem : MonoBehaviour
         ActivarPanel(pInicio);
     }
 
-    // --- NAVEGACIÓN ---
     public void IrAInicio() => ActivarPanel(pInicio);
     public void IrAConfig() => ActivarPanel(pConfigPartida);
     public void IrAOpciones() => ActivarPanel(pOpciones);
@@ -79,7 +78,6 @@ public class MenuSystem : MonoBehaviour
     public void CerrarConf() => pConfirmarSalir.SetActive(false);
     public void SalirDefiniti() => Application.Quit();
 
-    // --- SKINS ---
     public void CambiarSkin()
     {
         colorIndex = (colorIndex + 1) % coloresHex.Length;
@@ -109,7 +107,6 @@ public class MenuSystem : MonoBehaviour
 
     void ActualizarTextoColor() { if (textoSkin != null) textoSkin.text = "Color: " + (colorIndex + 1); }
 
-    // --- AJUSTES  ---
     public void AjustarMusica(float v)
     {
         
@@ -148,7 +145,6 @@ public class MenuSystem : MonoBehaviour
     }
 
 
-    // --- GESTOR DE PANELES ---
     void ActivarPanel(GameObject p)
     {
         if (pPortada) pPortada.SetActive(false);
@@ -221,7 +217,6 @@ public class MenuSystem : MonoBehaviour
     {
         if (txtUsuarioLogueado != null)
         {
-            // Recuperamos el nombre guardado en PlayerPrefs
             string nombre = PlayerPrefs.GetString("NombreUsuario", "Invitado");
             txtUsuarioLogueado.text = nombre;
         }

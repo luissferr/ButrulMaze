@@ -85,7 +85,7 @@ public class GameplayController : MonoBehaviour
         PlayerPrefs.SetFloat("UltimoTiempo", tiempoFinal);
         PlayerPrefs.SetString("UltimaEscena", nombreEscena);
 
-        // --- LÓGICA DE RANKING  ---
+        
         for (int i = 1; i <= 3; i++)
         {
             string claveRecord = nombreEscena + "_Record_" + i;

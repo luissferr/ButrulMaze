@@ -32,14 +32,14 @@ public class SoundManager : MonoBehaviour
         audioSource.volume = vol;
     }
 
-    // --- Volumen dinámico ---
+    
     public void CambiarVolumen(float v)
     {
         audioSource.volume = v;
         PlayerPrefs.SetFloat("VolSFX", v);
     }
 
-    // --- Métodos para reproducir cada sonido ---
+    
     public void Boton()
     {
         if (clickBoton != null)
