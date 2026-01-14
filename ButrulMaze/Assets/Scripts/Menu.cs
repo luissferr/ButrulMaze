@@ -11,6 +11,7 @@ public class MenuSystem : MonoBehaviour
     [Header("Usuario")]
     public InputField inputNombre;
     public Text txtBienvenida;
+    public Text txtUsuarioLogueado;
 
     [Header("Opciones")]
     public Slider sliderMusica, sliderBrillo, sliderSFX;
@@ -31,7 +32,7 @@ public class MenuSystem : MonoBehaviour
     void Start()
     {
         Random.InitState((int)System.DateTime.Now.Ticks);
-
+        ActualizarPerfilVisual();
         CargarAjustes();
         CargarSkin();
 
@@ -210,7 +211,18 @@ public class MenuSystem : MonoBehaviour
         // 2. Limpiamos el InputField para el siguiente usuario
         if (inputNombre != null) inputNombre.text = "";
 
+        ActualizarPerfilVisual();
         // 3. Volvemos al panel de Registro/Portada
         ActivarPanel(pRegistro);
+    }
+
+    public void ActualizarPerfilVisual()
+    {
+        if (txtUsuarioLogueado != null)
+        {
+            // Recuperamos el nombre guardado en PlayerPrefs
+            string nombre = PlayerPrefs.GetString("NombreUsuario", "Invitado");
+            txtUsuarioLogueado.text = nombre;
+        }
     }
 }
