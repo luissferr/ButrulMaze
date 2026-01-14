@@ -21,7 +21,7 @@ public class GameplayController : MonoBehaviour
         panelPausa.SetActive(false);
         activo = true;
         spawn = bola.transform.position;
-        Time.timeScale = 1f; // Aseguramos que el tiempo corre
+        Time.timeScale = 1f;
 
         totales = GameObject.FindGameObjectsWithTag("Gema").Length;
         ActualizarInterfaz();
@@ -48,7 +48,7 @@ public class GameplayController : MonoBehaviour
 
     public void Menu()
     {
-        Time.timeScale = 1f; // Descongelamos antes de irnos
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
     }
 
@@ -70,7 +70,7 @@ public class GameplayController : MonoBehaviour
             activo = false;
             PlayerPrefs.SetFloat("UltimoTiempo", tiempo);
             PlayerPrefs.Save();
-            SceneManager.LoadScene("Ranking"); // O donde debas ir
+            SceneManager.LoadScene("Ranking"); 
         }
     }
 
@@ -81,23 +81,21 @@ public class GameplayController : MonoBehaviour
         float tiempoFinal = tiempo;
         string nombreJugador = PlayerPrefs.GetString("NombreUsuario", "Jugador");
 
-        // Guardamos los datos de la partida actual para la UI de esta sesión
+        
         PlayerPrefs.SetFloat("UltimoTiempo", tiempoFinal);
         PlayerPrefs.SetString("UltimaEscena", nombreEscena);
 
-        // --- LÓGICA DE RANKING TOP 3 PERSISTENTE ---
+        // --- LÓGICA DE RANKING  ---
         for (int i = 1; i <= 3; i++)
         {
             string claveRecord = nombreEscena + "_Record_" + i;
             string claveNombre = nombreEscena + "_Nombre_" + i;
 
-            // Usamos un valor muy alto para que cualquier tiempo entre la primera vez
             float recordGuardado = PlayerPrefs.GetFloat(claveRecord, 99999f);
 
             if (tiempoFinal < recordGuardado)
             {
-                // DESPLAZAMIENTO: Movemos los puestos de abajo hacia el final
-                // Si entramos en el puesto 1, el 2 pasa al 3, y el 1 pasa al 2.
+                
                 for (int j = 3; j > i; j--)
                 {
                     string anteriorRecord = nombreEscena + "_Record_" + (j - 1);
@@ -107,13 +105,13 @@ public class GameplayController : MonoBehaviour
                     PlayerPrefs.SetString(nombreEscena + "_Nombre_" + j, PlayerPrefs.GetString(anteriorNombre, "---"));
                 }
 
-                // INSERTAR: Guardamos el nuevo récord en la posición i
+                
                 PlayerPrefs.SetFloat(claveRecord, tiempoFinal);
                 PlayerPrefs.SetString(claveNombre, nombreJugador);
 
-                break; // Salimos del bucle tras insertar el récord
+                break; 
             }
         }
-        PlayerPrefs.Save(); // Forzamos la persistencia en el disco
+        PlayerPrefs.Save(); 
     }
 }

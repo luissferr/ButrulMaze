@@ -36,7 +36,7 @@ public class MenuSystem : MonoBehaviour
         CargarAjustes();
         CargarSkin();
 
-        // Comprobar usuario
+        
         string nombre = PlayerPrefs.GetString("NombreUsuario", "");
         if (!string.IsNullOrEmpty(nombre))
         {
@@ -59,7 +59,9 @@ public class MenuSystem : MonoBehaviour
         PlayerPrefs.SetString("NombreUsuario", inputNombre.text);
         PlayerPrefs.Save();
 
-        // Actualiza el texto para que el nuevo usuario vea su nombre al instante
+        
+        ActualizarPerfilVisual();
+
         if (txtBienvenida != null) txtBienvenida.text = "Hola, " + inputNombre.text;
 
         ActivarPanel(pInicio);
@@ -180,7 +182,7 @@ public class MenuSystem : MonoBehaviour
     {
         if (lista != null && lista.Length > 1)
         {
-            // Recuperamos el índice del último nivel jugado para no repetirlo
+            
             int ultimoIndice = PlayerPrefs.GetInt("UltimoIndice_" + lista[0], -1);
             int nuevoIndice;
 
@@ -189,7 +191,7 @@ public class MenuSystem : MonoBehaviour
                 nuevoIndice = Random.Range(0, lista.Length);
             } while (nuevoIndice == ultimoIndice);
 
-            // Guardamos el nuevo índice antes de cargar
+           
             PlayerPrefs.SetInt("UltimoIndice_" + lista[0], nuevoIndice);
             SceneManager.LoadScene(lista[nuevoIndice]);
         }
@@ -204,15 +206,14 @@ public class MenuSystem : MonoBehaviour
 
     public void CambiarDeUsuario()
     {
-        // 1. Borramos el nombre actual para que al reiniciar no salte el registro
+        
         PlayerPrefs.SetString("NombreUsuario", "");
         PlayerPrefs.Save();
 
-        // 2. Limpiamos el InputField para el siguiente usuario
         if (inputNombre != null) inputNombre.text = "";
 
         ActualizarPerfilVisual();
-        // 3. Volvemos al panel de Registro/Portada
+        
         ActivarPanel(pRegistro);
     }
 
